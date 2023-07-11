@@ -1,0 +1,139 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - mysql-data:/var/lib/mysql
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE_HOST: ${MYSQL_HOST}
+      MYSQL_ROOT_HOST: '%'
+      SERVICE_NAME: mysql
+    networks:
+      - smr-net
+
+  redis:
+    image: redis:6.0
+    container_name: redis_container
+    restart: on-failure
+    volumes:
+      - redis-data:/data
+    expose:
+      - ${REDIS_PORT}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    environment:
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    networks:
+      - smr-net
+
+  rabbitmq:
+    image: rabbitmq:3.12.1
+    container_name: rabbitmq_container
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    ports:
+      - '${RABBITMQ_PORT}:${RABBITMQ_PORT}'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_ERLANG_COOKIE: somecookievalue
+      RABBITMQ_DISK_FREE_LIMIT: '{mem_relative, 0.5}'
+      RABBITMQ_HIPE_COMPILE: 1
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: '-rabbit my_rabbit@localhost'
+    networks:
+      - smr-net
+
+  ashland:
+    container_name: ashland_container
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: ashland
+    image: ashland:0.0.1
+    ports:
+      - ${SERVER_ONE_PORT}:${SERVER_ONE_PORT}
+    expose:
+      - ${SERVER_ONE_PORT}
+    restart: on-failure
+    environment:
+      SERVICE_NAME: ashland_service
+      SERVER_PORT: ${SERVER_ONE_PORT}
+    volumes:
+      - ./ashland/:/app/ashland
+    networks:
+      - smr-net
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
+
+  gallatin:
+    container_name: gallatin_container
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: gallatin
+    image: gallatin:0.0.1
+    ports:
+      - ${SERVER_TWO_PORT}:${SERVER_TWO_PORT}
+    expose:
+      - ${SERVER_TWO_PORT}
+    restart: on-failure
+    environment:
+      SERVICE_NAME: gallatin_service
+      SERVER_PORT: ${SERVER_TWO_PORT}
+    volumes:
+      - ./gallatin/:/app/gallatin
+    networks:
+      - smr-net
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
+
+  nashville:
+    container_name: nashville_container
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: nashville
+    image: nashville:0.0.1
+    ports:
+      - ${SERVER_THREE_PORT}:${SERVER_THREE_PORT}
+    expose:
+      - ${SERVER_THREE_PORT}
+    restart: on-failure
+    environment:
+      SERVICE_NAME: nashville_service
+      SERVER_PORT: ${SERVER_THREE_PORT}
+    volumes:
+      - ./nashville/:/app/nashville
+    networks:
+      - smr-net
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
+
+networks:
+  smr-net:
+    driver: bridge
+
+volumes:
+  smr-data: null
+  mysql-data: null
+  redis-data: null
+  rabbitmq-data: null
