@@ -5,9 +5,20 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { json, urlencoded } from 'express';
 import { AllExceptionsFilter } from '@common/exception';
+import { RedisIoAdapter } from '@common/adapters/redisIOAdapter.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  /* The code is creating a new instance of the `RedisIoAdapter` class and passing the `app` object as
+  a parameter to the constructor. Then, it calls the `connectToRedis()` method on the
+  `redisIoAdapter` instance to establish a connection to Redis. Finally, it sets the WebSocket
+  adapter of the NestJS application to be the `redisIoAdapter` instance using the
+  `app.useWebSocketAdapter()` method. This allows the application to use Redis as the WebSocket
+  adapter, enabling real-time communication through WebSockets. */
+  const redisIoAdapter = new RedisIoAdapter(app);
+  await redisIoAdapter.connectToRedis();
+  app.useWebSocketAdapter(redisIoAdapter);
 
   /* `app.enableCors()` is enabling Cross-Origin Resource Sharing (CORS) for the NestJS application.
   CORS is a security feature implemented by web browsers that restricts web pages from making

@@ -5,18 +5,29 @@ import {
   HealthCheck,
   DiskHealthIndicator,
   MemoryHealthIndicator,
+  HealthCheckResult,
 } from '@nestjs/terminus';
+import { RedisHealthIndicator } from '@liaoliaots/nestjs-redis-health';
+import Redis from 'ioredis';
+import { Config } from '@app/common/config';
 
 @Controller(HealthController.path)
 export class HealthController {
   static path = 'health';
+  private readonly redis: Redis;
 
   constructor(
     private health: HealthCheckService,
     private http: HttpHealthIndicator,
     private readonly disk: DiskHealthIndicator,
     private memory: MemoryHealthIndicator,
-  ) {}
+    private readonly redisIndicator: RedisHealthIndicator,
+  ) {
+    this.redis = new Redis({
+      host: Config.redis.host,
+      port: Config.redis.port,
+    });
+  }
 
   /* This is a method in a NestJS controller that is used to perform a health check on an HTTP
   endpoint. It uses the `@Get` decorator to specify the HTTP method and route path for the endpoint.
@@ -29,6 +40,26 @@ export class HealthController {
   checkHTTP() {
     return this.health.check([
       () => this.http.pingCheck('Google', 'https://www.google.com'),
+    ]);
+  }
+
+  /* This is a method in a NestJS controller that is used to perform a health check on a Redis database
+  connection. It uses the `@Get` decorator to specify the HTTP method and route path for the
+  endpoint. The `@HealthCheck()` decorator is used to indicate that this endpoint is a health check
+  endpoint. The `checkRedis()` method then uses the `HealthCheckService` to perform a health check
+  on the Redis database connection using the `RedisHealthIndicator` and returns the result of the
+  health check. The `checkHealth()` method of the `RedisHealthIndicator` is used to check the health
+  of the Redis database connection and sets a timeout of 500ms. */
+  @Get('redis')
+  @HealthCheck()
+  async checkRedis(): Promise<HealthCheckResult> {
+    return await this.health.check([
+      () =>
+        this.redisIndicator.checkHealth('redis', {
+          type: 'redis',
+          client: this.redis,
+          timeout: 500,
+        }),
     ]);
   }
 

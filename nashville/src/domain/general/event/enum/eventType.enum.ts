@@ -1,0 +1,5 @@
+export enum WSEventTypes {
+  SUCCESS_TYPE = 'SUCCESS_EVENT',
+  FAIL_TYPE = 'FAIL_EVENT',
+  ERROR_TYPE = 'ERROR_EVENT',
+}

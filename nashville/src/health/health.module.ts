@@ -3,6 +3,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
 import { HealthController } from '@health/health.controller';
 import { TerminusLogger } from '@health/terminus-logger.service';
+import { RedisHealthModule } from '@liaoliaots/nestjs-redis-health';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { TerminusLogger } from '@health/terminus-logger.service';
       errorLogStyle: 'pretty',
     }),
     HttpModule,
+    RedisHealthModule,
   ],
   controllers: [HealthController],
 })
