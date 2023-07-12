@@ -10,6 +10,7 @@
     "^@nest/(.*)$",
     "^@common/(.*)$",
     "^@health/(.*)$",
+    "^@database/(.*)$",
     "^@domain/(.*)$"
   ],
   "importOrderSeparation": false,

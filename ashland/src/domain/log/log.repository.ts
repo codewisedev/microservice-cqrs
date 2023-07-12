@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Task } from '@domain/task/models';
+import { Log } from '@domain/log/models';
 
 @Injectable()
-export class TaskRepository {
+export class LogRepository {
   constructor(
-    @InjectModel(Task)
-    private taskModel: typeof Task,
+    @InjectModel(Log)
+    private taskModel: typeof Log,
   ) {}
 }

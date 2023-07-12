@@ -24,4 +24,11 @@ export const Config = {
     username: process.env.RABBITMQ_USERNAME,
     password: process.env.RABBITMQ_PASSWORD,
   },
+  mysql: {
+    host: process.env.MYSQL_HOST,
+    port: +process.env.MYSQL_PORT,
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DB_NAME,
+  },
 };

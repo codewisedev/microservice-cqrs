@@ -25,6 +25,7 @@
       "@app/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@domain/*": ["src/domain/*"],
+      "@database/*": ["src/database/*"],
       "@health/*": ["src/health/*"],
       "@test/*": ["test/*"]
     }
