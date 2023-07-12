@@ -3,7 +3,7 @@ WORKDIR /app/ashland
 COPY /ashland/package*.json ./
 RUN npm install --force
 COPY /ashland/ .
-COPY . .
+COPY /env/ .
 RUN npm run build
 CMD [ "npm", "run", "start:dev" ]
 
@@ -12,7 +12,7 @@ WORKDIR /app/gallatin
 COPY /gallatin/package*.json ./
 RUN npm install --force
 COPY /gallatin/ .
-COPY . .
+COPY /env/ .
 RUN npm run build
 CMD [ "npm", "run", "start:dev" ]
 
@@ -21,6 +21,6 @@ WORKDIR /app/nashville
 COPY /nashville/package*.json ./
 RUN npm install --force
 COPY /nashville/ .
-COPY . .
+COPY /env/ .
 RUN npm run build
 CMD [ "npm", "run", "start:dev" ]
