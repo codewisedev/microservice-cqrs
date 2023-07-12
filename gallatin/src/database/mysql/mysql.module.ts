@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Config } from '@app/common/config';
+import { Task } from '@app/domain/task/models';
 
 @Module({
   imports: [
     SequelizeModule.forRoot({
-      dialect: 'mysql',
+      dialect: 'mssql',
       host: Config.mysql.host,
       port: Config.mysql.port,
       username: Config.mysql.username,
@@ -13,6 +14,7 @@ import { Config } from '@app/common/config';
       database: Config.mysql.database,
       autoLoadModels: true,
       synchronize: true,
+      models: [Task],
     }),
   ],
   exports: [],
