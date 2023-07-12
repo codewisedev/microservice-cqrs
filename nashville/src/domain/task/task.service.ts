@@ -15,11 +15,13 @@ export class TaskService implements OnModuleInit {
   ) {}
 
   onModuleInit() {
+    console.log(this.client);
     this.taskGrpcService =
       this.client.getService<TaskGRPCService>('TaskService');
   }
 
   async findTasks() {
+    console.log(this.taskGrpcService);
     const result = await this.taskGrpcService.find({ limit: 10, page: 1 });
     console.log(result);
     return console.log('return tasks!!');

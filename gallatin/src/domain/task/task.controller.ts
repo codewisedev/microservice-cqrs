@@ -9,20 +9,20 @@ import {
   UpdateTaskInterface,
 } from '@domain/task/interfaces';
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
+import { TaskService } from '@domain/task/task.service';
 
 @Controller()
 export class TaskController {
+  constructor(private readonly taskService: TaskService) {}
+
   @GrpcMethod('TaskService')
   find(
     request: FindTaskInterface,
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
-  ): TaskInterface {
+  ) {
     console.log('grpc find');
-    return {
-      items: new Uint8Array(),
-      total: 0,
-    };
+    return this.taskService.find(request);
   }
 
   @GrpcMethod('TaskService')
@@ -30,11 +30,9 @@ export class TaskController {
     request: CreateTaskInterface,
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
-  ): AKGInterface {
+  ) {
     console.log('grpc create');
-    return {
-      status: true,
-    };
+    return this.taskService.create(request);
   }
 
   @GrpcMethod('TaskService')
@@ -42,11 +40,9 @@ export class TaskController {
     request: UpdateTaskInterface,
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
-  ): AKGInterface {
+  ) {
     console.log('grpc update');
-    return {
-      status: true,
-    };
+    return this.taskService.update(request);
   }
 
   @GrpcMethod('TaskService')
@@ -54,10 +50,8 @@ export class TaskController {
     request: DeleteTaskInterface,
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
-  ): AKGInterface {
+  ) {
     console.log('grpc delete');
-    return {
-      status: true,
-    };
+    return this.taskService.delete(request);
   }
 }

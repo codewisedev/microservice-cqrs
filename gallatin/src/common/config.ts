@@ -13,6 +13,12 @@ export const Config = {
       cache: false,
     },
   },
+  eventEmitterModule: {
+    options: {
+      newListener: true,
+      global: true,
+    },
+  },
   app: {
     host: process.env.SERVER_HOST,
     port: +process.env.SERVER_PORT,
@@ -29,5 +35,11 @@ export const Config = {
     username: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.DB_NAME,
+  },
+  rabbitMq: {
+    host: process.env.RABBITMQ_HOST,
+    port: +process.env.RABBITMQ_PORT,
+    username: process.env.RABBITMQ_USERNAME,
+    password: process.env.RABBITMQ_PASSWORD,
   },
 };

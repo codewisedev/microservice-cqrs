@@ -5,8 +5,6 @@ dotenv.config({
   path: '.env',
 });
 
-console.log(process.env.PWD);
-
 /* This code exports a constant object named `Config` which contains various configuration options for
 a TypeScript application. */
 export const Config = {
@@ -19,5 +17,11 @@ export const Config = {
     host: process.env.SERVER_HOST,
     port: +process.env.SERVER_PORT,
     PWD: process.env.PWD,
+  },
+  rabbitMq: {
+    host: process.env.RABBITMQ_HOST,
+    port: +process.env.RABBITMQ_PORT,
+    username: process.env.RABBITMQ_USERNAME,
+    password: process.env.RABBITMQ_PASSWORD,
   },
 };
