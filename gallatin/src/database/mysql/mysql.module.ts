@@ -6,7 +6,7 @@ import { Task } from '@app/domain/task/models';
 @Module({
   imports: [
     SequelizeModule.forRoot({
-      dialect: 'mssql',
+      dialect: 'mysql',
       host: Config.mysql.host,
       port: Config.mysql.port,
       username: Config.mysql.username,

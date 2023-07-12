@@ -20,7 +20,8 @@ export const CommandHandlers = [
 export const QueryHandlers = [FindTasksQuery];
 
 @Module({
-  imports: [CqrsModule, SequelizeModule.forFeature([Task])],
+  // SequelizeModule.forFeature([Task])
+  imports: [CqrsModule],
   controllers: [TaskController],
   providers: [
     TaskService,

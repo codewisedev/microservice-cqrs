@@ -4,8 +4,7 @@ import { Task } from '@domain/task/models';
 
 @Injectable()
 export class TaskRepository {
-  constructor(
-    @InjectModel(Task)
-    private taskModel: typeof Task,
-  ) {}
+  constructor() {}
+  // @InjectModel(Task)
+  // private taskModel: typeof Task,
 }
