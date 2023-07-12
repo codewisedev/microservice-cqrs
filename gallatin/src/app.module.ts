@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HealthModule } from '@health/health.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
+import { DatabaseModule } from '@database/database.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     DomainModule,
     HealthModule,
+    DatabaseModule,
   ],
 })
 export class AppModule {}

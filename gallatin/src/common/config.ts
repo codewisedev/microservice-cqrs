@@ -34,7 +34,7 @@ export const Config = {
     port: +process.env.MYSQL_PORT,
     username: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: process.env.DB_NAME,
+    database: process.env.MYSQL_DB_NAME,
   },
   rabbitMq: {
     host: process.env.RABBITMQ_HOST,
