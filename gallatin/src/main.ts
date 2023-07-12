@@ -1,19 +1,21 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Config } from '@common/config';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   /* The `app.connectMicroservice()` method is used to connect a microservice to the NestJS
   application. In this case, it is connecting a gRPC microservice. */
-  // app.connectMicroservice<MicroserviceOptions>({
-  //   transport: Transport.GRPC,
-  //   options: {
-  //     package: 'task',
-  //     protoPath: 'task/task.proto',
-  //   },
-  // });
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      url: `${Config.app.host}:${Config.app.microserviceGrpcPort}`,
+      package: 'task',
+      protoPath: `${Config.app.PWD}/src/domain/task/proto/task.proto`,
+    },
+  });
 
   /* The `await app.startAllMicroservices();` line of code is starting all the microservices that have
   been connected to the NestJS application. This is necessary to establish communication between the

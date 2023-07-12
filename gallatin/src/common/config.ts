@@ -16,7 +16,7 @@ export const Config = {
   app: {
     host: process.env.SERVER_HOST,
     port: +process.env.SERVER_PORT,
-    webSocketPort: +process.env.SERVER_CONSTANTS_WEBSOCKET_PORT,
+    microserviceGrpcPort: +process.env.SERVER_CONSTANTS_MICROSERVICE_GRPC_PORT,
     PWD: process.env.PWD,
   },
   redis: {

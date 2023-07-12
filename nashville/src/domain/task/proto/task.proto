@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package task;
+
+service TaskService {
+  rpc Find (FindTasksRequest) returns (TaskResponse) {}
+  rpc Create (CreateTaskRequest) returns (AKG) {}
+  rpc Update (UpdateTaskRequest) returns (AKG) {}
+  rpc Delete (DeleteTaskRequest) returns (AKG) {}
+}
+
+message TaskResponse {
+  bytes items = 1;
+  int32 total = 2;
+}
+
+message AKG {
+  bool status = 1;
+}
+
+message FindTasksRequest {
+  int32 limit = 1;
+  int32 page = 2;
+}
+
+message CreateTaskRequest {
+  string parentId = 1;
+  string title = 2;
+  string description = 3;
+}
+
+message UpdateTaskRequest {
+  string taskId = 1;
+  string title = 2;
+  string description = 3;
+}
+
+message DeleteTaskRequest {
+  string taskId = 1;
+}

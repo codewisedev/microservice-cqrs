@@ -12,6 +12,7 @@
     "hset",
     "hvals",
     "nestjs",
+    "proto",
     "uuidv"
   ]
 }

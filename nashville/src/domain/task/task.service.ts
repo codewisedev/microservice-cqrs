@@ -1,18 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateTaskRequest, UpdateTaskRequest } from '@domain/task/request';
 import { EventService } from '@domain/general/event/event.service';
 import { WSEvents } from '@domain/general/event/enum';
+import { ClientGrpc } from '@nestjs/microservices';
+import { TaskGRPCService } from '@domain/task/interfaces';
 
 @Injectable()
-export class TaskService {
-  constructor(private readonly eventService: EventService) {}
+export class TaskService implements OnModuleInit {
+  private taskGrpcService: TaskGRPCService;
 
-  findTasks() {
-    // this.eventService.getTask(WSEvents.GET_TASK, []);
+  constructor(
+    @Inject('TASK_PACKAGE') private client: ClientGrpc,
+    private readonly eventService: EventService,
+  ) {}
+
+  onModuleInit() {
+    this.taskGrpcService =
+      this.client.getService<TaskGRPCService>('TaskService');
+  }
+
+  async findTasks() {
+    const result = await this.taskGrpcService.find({ limit: 10, page: 1 });
+    console.log(result);
     return console.log('return tasks!!');
   }
 
   createTask(body: CreateTaskRequest) {
+    // this.eventService.getTask(WSEvents.GET_TASK, {});
     console.log('task created!!');
   }
 
