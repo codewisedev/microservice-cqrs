@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaskRequest, UpdateTaskRequest } from '@domain/task/request';
-import { EventGateway } from '@domain/general/event/event.gateway';
+import { EventService } from '@domain/general/event/event.service';
 import { WSEvents } from '@domain/general/event/enum';
 
 @Injectable()
 export class TaskService {
-  constructor(private readonly eventGateway: EventGateway) {}
+  constructor(private readonly eventService: EventService) {}
 
   findTasks() {
-    this.eventGateway.server.emit(WSEvents.GET_TASK, ['task 1', 'task 2']);
+    // this.eventService.getTask(WSEvents.GET_TASK, []);
     return console.log('return tasks!!');
   }
 

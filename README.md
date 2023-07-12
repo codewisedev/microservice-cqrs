@@ -16,7 +16,7 @@ npm install
 Back to root project and run this command:
 
 ```bash
-sudo docker-compose --env-file ./env/docker.env -f docker-compose.yml up --build
+sudo docker-compose --env-file docker.env -f docker-compose.yml up --build
 ```
 
 ## Run Test
@@ -26,3 +26,7 @@ Go to nashville service and run this command:
 ```bash
 npm run test:e2e e2e/domain/*.e2e-spec.ts
 ```
+
+## API Document Url
+
+- Nashville (http://localhost:3003/api)

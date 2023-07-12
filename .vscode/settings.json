@@ -1,3 +1,17 @@
 {
-  "cSpell.words": ["nestjs", "uuidv"]
+  "cSpell.words": [
+    "CQRS",
+    "flushall",
+    "Gallatin",
+    "hdel",
+    "hexists",
+    "hget",
+    "hgetall",
+    "hkeys",
+    "hlen",
+    "hset",
+    "hvals",
+    "nestjs",
+    "uuidv"
+  ]
 }

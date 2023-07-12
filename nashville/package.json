@@ -21,11 +21,14 @@
     "test:e2e": "jest --config ./jest-e2e.ts --maxWorkers=1 --detectOpenHandles"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.17",
+    "@grpc/proto-loader": "^0.7.8",
     "@liaoliaots/nestjs-redis-health": "^9.0.4",
     "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/microservices": "^10.0.5",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-socket.io": "^10.0.5",
     "@nestjs/swagger": "^7.1.1",
