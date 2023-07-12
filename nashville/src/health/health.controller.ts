@@ -6,10 +6,12 @@ import {
   DiskHealthIndicator,
   MemoryHealthIndicator,
   HealthCheckResult,
+  GRPCHealthIndicator,
 } from '@nestjs/terminus';
 import { RedisHealthIndicator } from '@liaoliaots/nestjs-redis-health';
 import Redis from 'ioredis';
 import { Config } from '@app/common/config';
+import { GrpcOptions } from '@nestjs/microservices';
 
 @Controller(HealthController.path)
 export class HealthController {
@@ -22,11 +24,27 @@ export class HealthController {
     private readonly disk: DiskHealthIndicator,
     private memory: MemoryHealthIndicator,
     private readonly redisIndicator: RedisHealthIndicator,
+    private grpc: GRPCHealthIndicator,
   ) {
     this.redis = new Redis({
       host: Config.redis.host,
       port: Config.redis.port,
     });
+  }
+
+  /* The `@Get('grpc')` decorator is used to specify the HTTP method and route path for the endpoint.
+  In this case, it indicates that the endpoint is accessible via an HTTP GET request to the
+  '/health/grpc' path. */
+  @Get('grpc')
+  @HealthCheck()
+  check() {
+    return this.health.check([
+      async () =>
+        this.grpc.checkService<GrpcOptions>('health_service', 'health', {
+          url: `${Config.app.microserviceGrpcHost}:${Config.app.microserviceGrpcPort}`,
+          timeout: 2000,
+        }),
+    ]);
   }
 
   /* This is a method in a NestJS controller that is used to perform a health check on an HTTP

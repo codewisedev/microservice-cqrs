@@ -11,6 +11,21 @@ import {
 import { RedisHealthIndicator } from '@liaoliaots/nestjs-redis-health';
 import Redis from 'ioredis';
 import { Config } from '@app/common/config';
+import { GrpcMethod } from '@nestjs/microservices';
+
+enum ServingStatus {
+  UNKNOWN = 0,
+  SERVING = 1,
+  NOT_SERVING = 2,
+}
+
+interface HealthCheckRequest {
+  service: string;
+}
+
+interface HealthCheckResponse {
+  status: ServingStatus;
+}
 
 @Controller(HealthController.path)
 export class HealthController {
@@ -29,6 +44,15 @@ export class HealthController {
       host: Config.redis.host,
       port: Config.redis.port,
     });
+  }
+
+  /* The `@GrpcMethod('Health', 'Check')` decorator is used to define a gRPC method called "Check" in
+  the "Health" service. This method takes two parameters: `data` of type `HealthCheckRequest` and
+  `metadata` of type `any`. */
+  @GrpcMethod('Health', 'Check')
+  check(data: HealthCheckRequest, metadata: any): HealthCheckResponse {
+    console.log(data, metadata);
+    return { status: ServingStatus.SERVING };
   }
 
   /* This is a method in a NestJS controller that is used to perform a health check on an HTTP
