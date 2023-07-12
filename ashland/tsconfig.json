@@ -11,11 +11,22 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "resolveJsonModule": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
-    "noImplicitAny": false,
+    "allowJs": true,
     "strictBindCallApply": false,
+    "noImplicitAny": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
+    "paths": {
+      "@app/*": ["src/*"],
+      "@common/*": ["src/common/*"],
+      "@domain/*": ["src/domain/*"],
+      "@health/*": ["src/health/*"],
+      "@test/*": ["test/*"]
+    }
   }
 }

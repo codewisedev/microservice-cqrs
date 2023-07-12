@@ -1,4 +1,22 @@
 {
+  "printWidth": 80,
+  "tabWidth": 2,
+  "trailingComma": "all",
   "singleQuote": true,
-  "trailingComma": "all"
+  "semi": true,
+  "importOrder": [
+    "^./(.*)$",
+    "^../(.*)$",
+    "^@nest/(.*)$",
+    "^@common/(.*)$",
+    "^@health/(.*)$",
+    "^@domain/(.*)$"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": [
+    "typescript",
+    "classProperties",
+    "decorators-legacy"
+  ]
 }
