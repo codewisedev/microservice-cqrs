@@ -1,12 +1,14 @@
+import { Observable } from 'rxjs';
+
 export interface TaskGRPCService {
-  Find(data: FindTaskInterface): TaskInterface;
-  Create(data: CreateTaskInterface): TaskResponseInterface;
-  Update(data: UpdateTaskInterface): TaskResponseInterface;
-  Delete(data: DeleteTaskInterface): TaskResponseInterface;
+  Find(data: FindTaskInterface): Observable<TaskInterface>;
+  Create(data: CreateTaskInterface): Observable<TaskResponseInterface>;
+  Update(data: UpdateTaskInterface): Observable<TaskResponseInterface>;
+  Delete(data: DeleteTaskInterface): Observable<TaskResponseInterface>;
 }
 
 interface TaskInterface {
-  items: Uint8Array;
+  items: string;
   total: number;
 }
 

@@ -29,10 +29,14 @@ export class TaskService implements OnModuleInit {
    * taskGrpcService. The return statement will print the string 'return tasks!!'.
    */
   async findTasks(): Promise<any> {
-    const result = await this.taskGrpcService.Find({ limit: 10, page: 1 });
-    console.log(result);
+    const result = this.taskGrpcService
+      .Find({ limit: 10, page: 1 })
+      .toPromise();
     console.log('return tasks!!');
-    return result;
+    return {
+      items: JSON.parse((await result).items),
+      total: (await result).total,
+    };
   }
 
   /**

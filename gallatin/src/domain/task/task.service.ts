@@ -29,7 +29,11 @@ export class TaskService {
    */
   async find(request: FindTaskInterface) {
     const { limit, page } = request;
-    return await this.queryBus.execute(new FindTasksQuery(limit, page));
+    const result = await this.queryBus.execute(new FindTasksQuery(limit, page));
+    return {
+      items: JSON.stringify(result.items),
+      total: result.total,
+    };
   }
 
   /**

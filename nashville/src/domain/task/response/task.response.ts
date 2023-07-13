@@ -59,6 +59,37 @@ export class TaskResponse {
   description: string;
 
   /**
+   * Task's sub items
+   */
+  @Expose()
+  @Type(() => TaskResponse)
+  @ApiProperty({
+    type: [TaskResponse],
+    examples: [
+      {
+        id: 'd470cdc2-f8d8-45ea-a45d-7a030845f7c8',
+        parentId: 'e4259681-446f-42a9-8b40-ebda654dc88e',
+        title: 'MyTask',
+        description: 'Write code for computer programs and mobile applications',
+        subTasks: [
+          {
+            id: 'd470cdc2-f8d8-45ea-a45d-7a030845f7c8',
+            parentId: 'e4259681-446f-42a9-8b40-ebda654dc88e',
+            title: 'MyTask',
+            description:
+              'Write code for computer programs and mobile applications',
+            createdAt: '2023-01-17T16:45:30',
+            updatedAt: '2023-01-17T17:30:25',
+          },
+        ],
+        createdAt: '2023-01-17T16:45:30',
+        updatedAt: '2023-01-17T17:30:25',
+      },
+    ],
+  })
+  subTasks: TaskResponse[];
+
+  /**
    * Task's creation time
    */
   @Expose()

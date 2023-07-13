@@ -10,7 +10,7 @@ service TaskService {
 }
 
 message TaskPaginateResponse {
-  bytes items = 1;
+  string items = 1;
   int32 total = 2;
 }
 

@@ -17,13 +17,15 @@ export class TaskController {
   class. This method is called `find` and it takes in three parameters: `request`, `metadata`, and
   `call`. */
   @GrpcMethod('TaskService')
-  find(
+  async find(
     request: FindTaskInterface,
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
   ) {
     console.log('grpc find');
-    return this.taskService.find(request);
+    console.log(request);
+
+    return await this.taskService.find(request);
   }
 
   /* The `@GrpcMethod('TaskService')` decorator is used to define a gRPC method in the `TaskController`
