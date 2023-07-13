@@ -27,9 +27,10 @@ Go to nashville service and run this command:
 npm run test:e2e e2e/domain/*.e2e-spec.ts
 ```
 
-## WebSocket URL
+## WebSocket
 
-ws://nashville:3003
+- URL: ws://nashville:3003
+- Event: GET_TASK
 
 ## API Document Url
 

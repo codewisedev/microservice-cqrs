@@ -12,6 +12,7 @@ import {
   DeleteTaskCommand,
   UpdateTaskCommand,
 } from '@domain/task/commands/impl';
+import { sort } from 'fast-sort';
 
 @Injectable()
 export class TaskService {
@@ -30,8 +31,9 @@ export class TaskService {
   async find(request: FindTaskInterface) {
     const { limit, page } = request;
     const result = await this.queryBus.execute(new FindTasksQuery(limit, page));
+    const sortItems = sort(result.items).desc((u) => u['createdAt']);
     return {
-      items: JSON.stringify(result.items),
+      items: JSON.stringify(sortItems),
       total: result.total,
     };
   }

@@ -10,12 +10,6 @@ import { RedisIoAdapter } from '@common/adapters/redisIOAdapter.adapter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  /* The `await app.startAllMicroservices();` line of code is starting all the microservices that have
-  been connected to the NestJS application. This is necessary to establish communication between the
-  microservices and the main application. Once the microservices are started, they can send and
-  receive messages or perform other tasks as defined in their respective implementations. */
-  await app.startAllMicroservices();
-
   /* The code is creating a new instance of the `RedisIoAdapter` class and passing the `app` object as
   a parameter to the constructor. Then, it calls the `connectToRedis()` method on the
   `redisIoAdapter` instance to establish a connection to Redis. Finally, it sets the WebSocket

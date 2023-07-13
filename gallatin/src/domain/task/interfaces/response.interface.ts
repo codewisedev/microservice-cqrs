@@ -1,5 +1,5 @@
 export interface TaskInterface {
-  items: Uint8Array;
+  items: string;
   total: number;
 }
 

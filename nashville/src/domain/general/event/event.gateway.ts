@@ -11,8 +11,6 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WSEvents } from '@domain/general/event/enum';
-import { Config } from '@common/config';
-import { TaskResponse } from '@app/domain/task/response';
 
 @WebSocketGateway({
   transports: ['websocket'],
