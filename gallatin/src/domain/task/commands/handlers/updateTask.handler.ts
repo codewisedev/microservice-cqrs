@@ -34,14 +34,14 @@ export class UpdateTaskCommandHandler
 
     if (result === 1) {
       if (dataValues.parentId === null) {
-        this.redisService.hset(TaskList, taskId, dataValues);
+        this.redisService.hset(TaskList, taskId, JSON.stringify(dataValues));
       } else {
         const parent = JSON.parse(
-          await this.redisService.hget(TaskList, taskId),
+          await this.redisService.hget(TaskList, dataValues.parentId),
         );
 
-        parent.subTasks.map((item) => {
-          if (item.id === taskId) item = dataValues;
+        parent?.subTasks.forEach((item, index) => {
+          if (item.id === taskId) parent.subTasks[index] = dataValues;
         });
 
         this.redisService.hset(TaskList, parent.id, JSON.stringify(parent));

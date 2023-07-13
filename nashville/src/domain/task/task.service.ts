@@ -52,7 +52,7 @@ export class TaskService implements OnModuleInit {
    */
   createTask(body: CreateTaskRequest) {
     const { title, description, parentId } = body;
-    this.taskGrpcService.Create({ title, description, parentId });
+    this.taskGrpcService.Create({ parentId, title, description }).toPromise();
 
     /* `this.eventService.getTask(new Task(body));` is calling the `getTask` method of the
     `eventService` and passing a new `Task` object created from the `body` parameter. It is likely
@@ -72,7 +72,7 @@ export class TaskService implements OnModuleInit {
    */
   updateTask(taskId: string, body: UpdateTaskRequest) {
     const { title, description } = body;
-    this.taskGrpcService.Update({ taskId, title, description });
+    this.taskGrpcService.Update({ taskId, title, description }).toPromise();
 
     /* `this.eventService.getTask(new Task(body));` is calling the `getTask` method of the
     `eventService` and passing a new `Task` object created from the `body` parameter. It is likely
@@ -89,7 +89,7 @@ export class TaskService implements OnModuleInit {
    * of the task that needs to be deleted.
    */
   deleteTasks(taskId: string) {
-    this.taskGrpcService.Delete({ taskId });
+    this.taskGrpcService.Delete({ taskId }).toPromise();
 
     console.log('task deleted!!');
   }
