@@ -1,6 +1,6 @@
 # CQRS example
 
-Microservice with CQRS in NestJs with RabbitMQ and gRPC
+Microservice with CQRS, RabbitMQ and gRPC in NestJs
 
 ## Installation
 
@@ -23,10 +23,10 @@ sudo docker-compose --env-file docker.env -f docker-compose.yml up --build
 
 ## Run Test
 
-Go to nashville service and run this command:
+Run all services and go to nashville service path and run this command:
 
 ```bash
-npm run test:e2e e2e/domain/*.e2e-spec.ts
+npm run test:e2e domain/*.e2e-spec.ts
 ```
 
 ## WebSocket
