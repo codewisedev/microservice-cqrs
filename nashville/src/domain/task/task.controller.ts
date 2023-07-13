@@ -52,12 +52,25 @@ export class TaskController {
     description: 'Get all task list.',
     summary: 'Get all task list and return status code 200.',
     exceptions: ['400 (Bad Request): Pagination params not valid.'],
+    params: [
+      {
+        name: 'limit',
+        type: 'number',
+      },
+      {
+        name: 'page',
+        type: 'number',
+      },
+    ],
     200: [TaskResponse],
   })
   @HttpCode(HttpStatus.OK)
   @TransformPlainToInstancePaginated(TaskResponse)
-  findTasks(): Promise<PaginatedResponse<TaskResponse>> {
-    return this.taskService.findTasks();
+  findTasks(
+    @Param('limit') limit: number,
+    @Param('page') page: number,
+  ): Promise<PaginatedResponse<TaskResponse>> {
+    return this.taskService.findTasks(limit, page);
   }
 
   /**

@@ -20,7 +20,7 @@ export class CreateTaskQueryHandler implements IQueryHandler<FindTasksQuery> {
     for (const item of data) tasks.push(JSON.parse(item));
 
     return {
-      items: this.paginate(tasks, limit, page),
+      items: await this.paginate(tasks, limit, page),
       total: tasks.length,
     };
   }

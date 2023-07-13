@@ -23,15 +23,19 @@ export class TaskService implements OnModuleInit {
   }
 
   /**
-   * The function "findTasks" calls a gRPC service to find tasks, logs the result, and returns a
-   * message indicating that tasks have been returned.
-   * @returns The console.log(result) statement will print the result of the Find method from the
-   * taskGrpcService. The return statement will print the string 'return tasks!!'.
+   * The function `findTasks` is an asynchronous function that retrieves a list of tasks with a
+   * specified limit and page number and returns the items and total count of tasks.
+   * @param {number} limit - The `limit` parameter specifies the maximum number of tasks to retrieve in
+   * a single page.
+   * @param {number} page - The page parameter is used to specify the page number of the results you
+   * want to retrieve. It is typically used in combination with the limit parameter to implement
+   * pagination.
+   * @returns an object with two properties: "items" and "total". The "items" property is an array of
+   * tasks, parsed from the result of the "Find" method of the "taskGrpcService". The "total" property
+   * is the total number of tasks.
    */
-  async findTasks(): Promise<any> {
-    const result = this.taskGrpcService
-      .Find({ limit: 10, page: 1 })
-      .toPromise();
+  async findTasks(limit: number, page: number): Promise<any> {
+    const result = this.taskGrpcService.Find({ limit, page }).toPromise();
     console.log('return tasks!!');
     return {
       items: JSON.parse((await result).items),
