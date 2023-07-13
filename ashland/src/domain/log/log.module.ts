@@ -11,4 +11,4 @@ import { LogController } from '@domain/log/log.controller';
   providers: [LogService, LogRepository],
   exports: [LogService],
 })
-export class TaskModule {}
+export class LogModule {}

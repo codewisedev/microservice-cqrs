@@ -1,11 +1,9 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import {
-  AKGInterface,
   CreateTaskInterface,
   DeleteTaskInterface,
   FindTaskInterface,
-  TaskInterface,
   UpdateTaskInterface,
 } from '@domain/task/interfaces';
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
@@ -15,6 +13,9 @@ import { TaskService } from '@domain/task/task.service';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
+  /* The `@GrpcMethod('TaskService')` decorator is used to define a gRPC method in the `TaskController`
+  class. This method is called `find` and it takes in three parameters: `request`, `metadata`, and
+  `call`. */
   @GrpcMethod('TaskService')
   find(
     request: FindTaskInterface,
@@ -25,6 +26,9 @@ export class TaskController {
     return this.taskService.find(request);
   }
 
+  /* The `@GrpcMethod('TaskService')` decorator is used to define a gRPC method in the `TaskController`
+  class. This specific method is called `create` and it takes in three parameters: `request`,
+  `metadata`, and `call`. */
   @GrpcMethod('TaskService')
   create(
     request: CreateTaskInterface,
@@ -35,6 +39,9 @@ export class TaskController {
     return this.taskService.create(request);
   }
 
+  /* The `@GrpcMethod('TaskService')` decorator is used to define a gRPC method in the `TaskController`
+  class. This specific method is called `update` and it takes in three parameters: `request`,
+  `metadata`, and `call`. */
   @GrpcMethod('TaskService')
   update(
     request: UpdateTaskInterface,
@@ -45,6 +52,9 @@ export class TaskController {
     return this.taskService.update(request);
   }
 
+  /* The `@GrpcMethod('TaskService')` decorator is used to define a gRPC method in the `TaskController`
+  class. This specific method is called `delete` and it takes in three parameters: `request`,
+  `metadata`, and `call`. */
   @GrpcMethod('TaskService')
   delete(
     request: DeleteTaskInterface,

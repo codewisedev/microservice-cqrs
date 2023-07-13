@@ -11,6 +11,8 @@ import {
   DeleteTaskCommandHandler,
 } from '@domain/task/commands/handlers';
 import { CreateTaskQueryHandler } from '@domain/task/queries/handlers';
+import { LoggerModule } from '@domain/logger/logger.module';
+import { RedisModule } from '@app/database/redis/redis.module';
 
 export const CommandHandlers = [
   CreateTaskCommandHandler,
@@ -20,7 +22,12 @@ export const CommandHandlers = [
 export const QueryHandlers = [CreateTaskQueryHandler];
 
 @Module({
-  imports: [CqrsModule, SequelizeModule.forFeature([Task])],
+  imports: [
+    CqrsModule,
+    SequelizeModule.forFeature([Task]),
+    LoggerModule,
+    RedisModule,
+  ],
   controllers: [TaskController],
   providers: [
     TaskService,

@@ -5,6 +5,7 @@ import {
   HealthCheck,
   DiskHealthIndicator,
   MemoryHealthIndicator,
+  SequelizeHealthIndicator,
 } from '@nestjs/terminus';
 
 @Controller(HealthController.path)
@@ -16,6 +17,7 @@ export class HealthController {
     private http: HttpHealthIndicator,
     private readonly disk: DiskHealthIndicator,
     private memory: MemoryHealthIndicator,
+    private mysqlDb: SequelizeHealthIndicator,
   ) {}
 
   /* This is a method in a NestJS controller that is used to perform a health check on an HTTP
@@ -30,6 +32,14 @@ export class HealthController {
     return this.health.check([
       () => this.http.pingCheck('Google', 'https://www.google.com'),
     ]);
+  }
+
+  /* This is a method in a NestJS controller that is used to perform a health check on a database
+  connection using the Sequelize ORM. */
+  @Get('mysql')
+  @HealthCheck()
+  checkDB() {
+    return this.health.check([async () => this.mysqlDb.pingCheck('sequelize')]);
   }
 
   /* This is a method in a NestJS controller that is used to perform a health check on the storage

@@ -6,7 +6,7 @@ import {
   FindTaskInterface,
   UpdateTaskInterface,
 } from '@domain/task/interfaces';
-import { FindTasksQuery } from '@domain/task/queries';
+import { FindTasksQuery } from '@domain/task/queries/impl';
 import {
   CreateTaskCommand,
   DeleteTaskCommand,

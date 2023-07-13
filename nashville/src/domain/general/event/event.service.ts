@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Server } from 'ws';
 import { WSEventTypes, WSEvents } from '@domain/general/event/enum';
-import { TaskResponse } from '@app/domain/task/response';
 import { EventGateway } from '@domain/general/event/event.gateway';
+import { Task } from '@app/domain/task/entity';
 
 @Injectable()
 export class EventService {
@@ -21,7 +21,7 @@ export class EventService {
    * The function emits a WebSocket event with the data provided.
    * @param {TaskResponse[]} data - The data parameter is an array of TaskResponse objects.
    */
-  getTask(data: TaskResponse[]) {
+  getTask(data: Task) {
     this.eventGateway.server.emit(WSEvents.GET_TASK, data);
   }
 }

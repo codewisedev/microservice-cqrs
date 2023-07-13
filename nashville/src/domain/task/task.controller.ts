@@ -56,9 +56,8 @@ export class TaskController {
   })
   @HttpCode(HttpStatus.OK)
   @TransformPlainToInstancePaginated(TaskResponse)
-  findTasks() {
-    //Promise<PaginatedResponse<TaskResponse>>
-    this.taskService.findTasks();
+  findTasks(): Promise<PaginatedResponse<TaskResponse>> {
+    return this.taskService.findTasks();
   }
 
   /**
