@@ -116,10 +116,12 @@ services:
       - ${SERVER_THREE_PORT}:${SERVER_THREE_PORT}
     expose:
       - ${SERVER_THREE_PORT}
+      - ${WEB_SOCKET_PORT}
     restart: on-failure
     environment:
       SERVICE_NAME: nashville_service
       SERVER_PORT: ${SERVER_THREE_PORT}
+      WEB_SOCKET_PORT: ${WEB_SOCKET_PORT}
     volumes:
       - ./nashville/:/app/nashville
     networks:

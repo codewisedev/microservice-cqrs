@@ -1,9 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { TaskRepository } from '@domain/task/task.repository';
-
-export class DeleteTaskCommand {
-  constructor(public readonly taskId: string) {}
-}
+import { DeleteTaskCommand } from '@domain/task/commands/impl';
 
 @CommandHandler(DeleteTaskCommand)
 export class DeleteTaskCommandHandler

@@ -1,13 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { TaskRepository } from '@domain/task/task.repository';
-
-export class UpdateTaskCommand {
-  constructor(
-    public readonly taskId: string,
-    public readonly title: string,
-    public readonly description: string,
-  ) {}
-}
+import { UpdateTaskCommand } from '@domain/task/commands/impl';
 
 @CommandHandler(UpdateTaskCommand)
 export class UpdateTaskCommandHandler

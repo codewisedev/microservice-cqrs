@@ -1,15 +1,14 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { RedisService } from '@app/database/redis/redis.service';
-
-export class FindTasksQuery {
-  constructor(public readonly limit: number, public readonly page: number) {}
-}
+import { FindTasksQuery } from '@domain/task/queries/impl';
 
 @QueryHandler(FindTasksQuery)
 export class CreateTaskQueryHandler implements IQueryHandler<FindTasksQuery> {
-  constructor(private repository: RedisService) {}
-
+  constructor() {}
+  // private repository: RedisService
   async execute(query: FindTasksQuery) {
+    console.log('testsssssssssssssssssssssssss');
+
     const { limit, page } = query;
     // Get tasks from redis
   }

@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
 export interface TaskGRPCService {
-  find(data: FindTaskInterface): Observable<TaskInterface>;
-  create(data: CreateTaskInterface): Observable<AKGInterface>;
-  update(data: UpdateTaskInterface): Observable<AKGInterface>;
-  delete(data: DeleteTaskInterface): Observable<AKGInterface>;
+  Find(data: FindTaskInterface): Observable<TaskInterface>;
+  Create(data: CreateTaskInterface): Observable<AKGInterface>;
+  Update(data: UpdateTaskInterface): Observable<AKGInterface>;
+  Delete(data: DeleteTaskInterface): Observable<AKGInterface>;
 }
 
 interface TaskInterface {

@@ -1,1 +1,1 @@
-export * from './findTask.query';
+export * from './impl/findTask.query';
