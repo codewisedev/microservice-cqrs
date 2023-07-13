@@ -2,10 +2,13 @@ import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '@app/app.module';
+import { TaskController } from '@app/domain/task/task.controller';
+import { TaskResponse } from '@app/domain/task/response';
 
 describe('Task E2E Test', () => {
   let app: INestApplication;
-  const staticPath = `/${'controller'}/`;
+  let task: TaskResponse;
+  const staticPath = `/${TaskController.path}/`;
 
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
@@ -22,16 +25,32 @@ describe('Task E2E Test', () => {
   });
 
   it('Create new task', async () => {
-    // const response = await request(app.getHttpServer())
-    //   .delete(staticPath + `taskId`)
-    // expect(response.statusCode).toBe(HttpStatus.NO_CONTENT);
+    const response = await request(app.getHttpServer()).post(
+      staticPath + 'create',
+    );
+    expect(response.statusCode).toBe(HttpStatus.CREATED);
   });
 
-  it('Get all task', async () => {});
+  it('Get all task', async () => {
+    const response = await request(app.getHttpServer()).post(
+      staticPath + 'list',
+    );
+    expect(response.statusCode).toBe(HttpStatus.OK);
 
-  it('Update specified task', async () => {});
+    task = response[0];
+  });
 
-  it('Delete specified task', async () => {});
+  it('Update specified task', async () => {
+    const response = await request(app.getHttpServer()).post(
+      staticPath + `/${task.id}/update`,
+    );
+    expect(response.statusCode).toBe(HttpStatus.NO_CONTENT);
+  });
 
-  it('Delete specified group', async () => {});
+  it('Delete specified task', async () => {
+    const response = await request(app.getHttpServer()).post(
+      staticPath + `/${task.id}/delete`,
+    );
+    expect(response.statusCode).toBe(HttpStatus.NO_CONTENT);
+  });
 });

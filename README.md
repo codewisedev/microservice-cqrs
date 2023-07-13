@@ -1,5 +1,7 @@
 # CQRS example
 
+Microservice with CQRS in NestJs with RabbitMQ and gRPC
+
 ## Installation
 
 Go to all service and run this command:
