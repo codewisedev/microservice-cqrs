@@ -1,8 +1,8 @@
 export interface TaskGRPCService {
-  find(data: FindTaskInterface): TaskInterface;
-  create(data: CreateTaskInterface): TaskResponseInterface;
-  update(data: UpdateTaskInterface): TaskResponseInterface;
-  delete(data: DeleteTaskInterface): TaskResponseInterface;
+  Find(data: FindTaskInterface): TaskInterface;
+  Create(data: CreateTaskInterface): TaskResponseInterface;
+  Update(data: UpdateTaskInterface): TaskResponseInterface;
+  Delete(data: DeleteTaskInterface): TaskResponseInterface;
 }
 
 interface TaskInterface {

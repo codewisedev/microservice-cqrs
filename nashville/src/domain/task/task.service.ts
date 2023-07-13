@@ -28,8 +28,8 @@ export class TaskService implements OnModuleInit {
    * @returns The console.log(result) statement will print the result of the Find method from the
    * taskGrpcService. The return statement will print the string 'return tasks!!'.
    */
-  findTasks(): any {
-    const result = this.taskGrpcService.find({ limit: 10, page: 1 });
+  async findTasks(): Promise<any> {
+    const result = await this.taskGrpcService.Find({ limit: 10, page: 1 });
     console.log(result);
     console.log('return tasks!!');
     return result;
@@ -44,7 +44,7 @@ export class TaskService implements OnModuleInit {
    */
   createTask(body: CreateTaskRequest) {
     const { title, description, parentId } = body;
-    this.taskGrpcService.create({ title, description, parentId });
+    this.taskGrpcService.Create({ title, description, parentId });
 
     /* `this.eventService.getTask(new Task(body));` is calling the `getTask` method of the
     `eventService` and passing a new `Task` object created from the `body` parameter. It is likely
@@ -64,7 +64,7 @@ export class TaskService implements OnModuleInit {
    */
   updateTask(taskId: string, body: UpdateTaskRequest) {
     const { title, description } = body;
-    this.taskGrpcService.update({ taskId, title, description });
+    this.taskGrpcService.Update({ taskId, title, description });
 
     /* `this.eventService.getTask(new Task(body));` is calling the `getTask` method of the
     `eventService` and passing a new `Task` object created from the `body` parameter. It is likely
@@ -81,7 +81,7 @@ export class TaskService implements OnModuleInit {
    * of the task that needs to be deleted.
    */
   deleteTasks(taskId: string) {
-    this.taskGrpcService.delete({ taskId });
+    this.taskGrpcService.Delete({ taskId });
 
     console.log('task deleted!!');
   }

@@ -18,8 +18,9 @@ message TaskResponse {
   string id  = 1;
   string parentId  = 2;
   string title  = 3;
-  string createdAt  = 4;
-  string updatedAt  = 5;
+  string description  = 4;
+  string createdAt  = 5;
+  string updatedAt  = 6;
 }
 
 message FindTasksRequest {
