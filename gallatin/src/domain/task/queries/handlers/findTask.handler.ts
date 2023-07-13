@@ -18,6 +18,7 @@ export class CreateTaskQueryHandler implements IQueryHandler<FindTasksQuery> {
     const tasks = [];
     const data = Object.values(await this.repository.hgetall(TaskList));
     for (const item of data) tasks.push(JSON.parse(item));
+
     return {
       items: this.paginate(tasks, limit, page),
       total: tasks.length,

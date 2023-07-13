@@ -10,8 +10,8 @@ export class TaskService implements OnModuleInit {
   private taskGrpcService: TaskGRPCService;
 
   constructor(
-    @Inject('TASK_PACKAGE') private client: ClientGrpc,
     private readonly eventService: EventService,
+    @Inject('TASK_PACKAGE') private readonly client: ClientGrpc,
   ) {}
 
   /**

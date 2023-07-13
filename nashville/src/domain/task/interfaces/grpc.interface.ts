@@ -1,8 +1,8 @@
 export interface TaskGRPCService {
   find(data: FindTaskInterface): TaskInterface;
-  create(data: CreateTaskInterface): AKGInterface;
-  update(data: UpdateTaskInterface): AKGInterface;
-  delete(data: DeleteTaskInterface): AKGInterface;
+  create(data: CreateTaskInterface): TaskResponseInterface;
+  update(data: UpdateTaskInterface): TaskResponseInterface;
+  delete(data: DeleteTaskInterface): TaskResponseInterface;
 }
 
 interface TaskInterface {
@@ -10,8 +10,13 @@ interface TaskInterface {
   total: number;
 }
 
-interface AKGInterface {
-  status: boolean;
+interface TaskResponseInterface {
+  id: string;
+  parentId: string;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface FindTaskInterface {

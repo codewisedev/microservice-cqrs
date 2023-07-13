@@ -27,9 +27,9 @@ export class TaskService {
    * parameters for the find request. It has two properties:
    * @returns The result of executing the FindTasksQuery with the specified limit and page parameters.
    */
-  find(request: FindTaskInterface) {
+  async find(request: FindTaskInterface) {
     const { limit, page } = request;
-    return this.queryBus.execute(new FindTasksQuery(limit, page));
+    return await this.queryBus.execute(new FindTasksQuery(limit, page));
   }
 
   /**
