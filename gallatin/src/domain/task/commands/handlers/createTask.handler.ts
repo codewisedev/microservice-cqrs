@@ -10,6 +10,7 @@ export class CreateTaskCommandHandler
 
   async execute(command: CreateTaskCommand) {
     const { description, title, parentId } = command;
+    console.log(description, title, parentId);
     // if(parentId) exist!!
     // const task = this.repository.createTask(command);
     // Add task in redis
