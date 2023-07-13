@@ -23,8 +23,6 @@ export class TaskController {
     call: ServerUnaryCall<any, any>,
   ) {
     console.log('grpc find');
-    console.log(request);
-
     return await this.taskService.find(request);
   }
 

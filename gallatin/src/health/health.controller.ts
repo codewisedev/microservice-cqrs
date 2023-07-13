@@ -51,7 +51,7 @@ export class HealthController {
   `metadata` of type `any`. */
   @GrpcMethod('Health', 'Check')
   check(data: HealthCheckRequest, metadata: any): HealthCheckResponse {
-    console.log(data, metadata);
+    console.log(data);
     return { status: ServingStatus.SERVING };
   }
 
