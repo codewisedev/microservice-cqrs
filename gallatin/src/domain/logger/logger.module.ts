@@ -1,6 +1,7 @@
 import { Config } from '@app/common/config';
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { LoggerService } from '@domain/logger/logger.service';
 
 @Module({
   imports: [
@@ -13,7 +14,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
             `amqp://${Config.rabbitMq.username}:${Config.rabbitMq.password}@${Config.rabbitMq.host}:${Config.rabbitMq.port}`,
           ],
           queue: 'logs_queue',
-          noAck: false,
           queueOptions: {
             durable: false,
           },
@@ -21,5 +21,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       },
     ]),
   ],
+  providers: [LoggerService],
+  exports: [LoggerService],
 })
 export class LoggerModule {}

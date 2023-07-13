@@ -3,19 +3,23 @@ syntax = "proto3";
 package task;
 
 service TaskService {
-  rpc Find (FindTasksRequest) returns (TaskResponse) {}
-  rpc Create (CreateTaskRequest) returns (AKG) {}
-  rpc Update (UpdateTaskRequest) returns (AKG) {}
-  rpc Delete (DeleteTaskRequest) returns (AKG) {}
+  rpc Find (FindTasksRequest) returns (TaskPaginateResponse) {}
+  rpc Create (CreateTaskRequest) returns (TaskResponse) {}
+  rpc Update (UpdateTaskRequest) returns (TaskResponse) {}
+  rpc Delete (DeleteTaskRequest) returns (TaskResponse) {}
 }
 
-message TaskResponse {
+message TaskPaginateResponse {
   bytes items = 1;
   int32 total = 2;
 }
 
-message AKG {
-  bool status = 1;
+message TaskResponse {
+  string id  = 1;
+  string parentId  = 2;
+  string title  = 3;
+  string createdAt  = 4;
+  string updatedAt  = 5;
 }
 
 message FindTasksRequest {

@@ -25,6 +25,20 @@ export class RedisService {
   }
 
   /**
+   * This is an asynchronous function that retrieves a value from a Redis database using a given key.
+   * @param {string} key - The "key" parameter is a string that represents the key of the value to be
+   * retrieved from the Redis database. In Redis, keys are used to identify and retrieve values stored
+   * in the database.
+   * @returns The `get` method is returning the value associated with the given `key` from the Redis
+   * database. The value is obtained by calling the `get` method of the Redis client instance returned
+   * by `this.redisService.getClient()`. The `await` keyword is used to wait for the Redis client to
+   * return the value before returning it from the `get` method.
+   */
+  async get(key: string) {
+    return await this.redisService.getClient().get(key);
+  }
+
+  /**
    * This is an asynchronous function that deletes a key from a Redis database using the Redis client.
    * @param {string} key - The "key" parameter is a string that represents the key of the data that
    * needs to be deleted from the Redis database.
@@ -113,6 +127,13 @@ export class RedisService {
     return await this.redisService.getClient().incr(key);
   }
 
+  /**
+   * The function `decr` asynchronously decrements the value of a key in a Redis database.
+   * @param {string} key - The `key` parameter is a string that represents the key of the value to be
+   * decremented in the Redis database.
+   * @returns The `decr` method is returning the result of the `decr` operation performed on the Redis
+   * client with the given key.
+   */
   async decr(key: string) {
     return await this.redisService.getClient().decr(key);
   }
@@ -227,19 +248,5 @@ export class RedisService {
    */
   async hExists(key: string, field: string) {
     return await this.redisService.getClient().hexists(key, field);
-  }
-
-  /**
-   * This is an asynchronous function that retrieves a value from a Redis database using a given key.
-   * @param {string} key - The "key" parameter is a string that represents the key of the value to be
-   * retrieved from the Redis database. In Redis, keys are used to identify and retrieve values stored
-   * in the database.
-   * @returns The `get` method is returning the value associated with the given `key` from the Redis
-   * database. The value is obtained by calling the `get` method of the Redis client instance returned
-   * by `this.redisService.getClient()`. The `await` keyword is used to wait for the Redis client to
-   * return the value before returning it from the `get` method.
-   */
-  async get(key: string) {
-    return await this.redisService.getClient().get(key);
   }
 }

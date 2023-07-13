@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 status, and createdAt, and has a constructor that initializes a new instance of the class with
 optional properties. */
 export class Log {
-  _id: string;
+  id: string;
   taskId: string;
   status: string;
   createdAt: Date;
@@ -17,7 +17,7 @@ export class Log {
    * creating an instance of the class, you can pass in an object that may or may not have
    */
   constructor(log: Partial<Log>) {
-    this._id = uuidv4();
+    this.id = uuidv4();
     this.createdAt = new Date();
     Object.assign(this, log);
   }

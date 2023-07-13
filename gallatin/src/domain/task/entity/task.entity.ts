@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 /* The Task class is a TypeScript class that represents a task with properties such as title,
 description, createdAt, and updatedAt. */
-export class Task {
+export class TaskEntity {
   id: string;
   parentId: string;
   title: string;
@@ -17,7 +17,7 @@ export class Task {
    * parameter can be a partial object of the `Task` type, meaning it can have
    */
 
-  constructor(task: Partial<Task>) {
+  constructor(task: Partial<TaskEntity>) {
     this.id = uuidv4();
     this.createdAt = new Date();
     Object.assign(this, task);

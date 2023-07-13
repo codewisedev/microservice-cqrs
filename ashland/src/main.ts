@@ -15,7 +15,6 @@ async function bootstrap() {
         `amqp://${Config.rabbitMq.username}:${Config.rabbitMq.password}@${Config.rabbitMq.host}:${Config.rabbitMq.port}`,
       ],
       queue: 'logs_queue',
-      noAck: false,
       queueOptions: {
         durable: false,
       },
